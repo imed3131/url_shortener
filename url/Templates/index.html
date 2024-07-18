@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Code Entry</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6f61, #de6161);
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin-bottom: 1em;
+            color: #333;
+        }
+        
+        input[type="text"] {
+            width: 80%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button {
+            padding: 0.5em 2em;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+        
+</head>
+<body>
+    <div class="container">
+        <h1>Enter your URL code</h1>
+        <form action="http://127.0.0.1:8000/url_shortener/url/" method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter code here" name="url">
+            <button type="submit">Submit</button>
+        </form>
+        {% if message == 'valid' %}
+            <p>
+                Your url : {{ normal }} <br>
+                Shorten url : {{shorten }}
+            </p>
+        {% elif message == 'not valid' %}
+            <p>Your url is not valid</p>
+        {% elif message == 'entry not valid' %}
+            <p>Wrong shorten url</p>
+        {% else %}    
+        {% endif %}
+    </div>
+</body>
+</html>
